@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ninja jewelry
+{% endblock%}
+
+{% block body %}
+    <div class="catalog_block">
+        <div class="sale">
+            <img src="{{ url_for('static', filename='img/sale.jpg') }}" alt="">
+        </div>
+        <div class="filter">
+            <div class="btn_border btn_filter" id="btn_filter">
+                Фільтр
+            </div>
+            <div class="pas" id="btn_filter2">
+                <div class="btn_filter_menu">
+                    <div class="btn_filter_nav">
+                        <b>Ціна</b>
+                        <p>↓</p>
+                    </div>
+                    <div class="pas btn_filter_nav2 pric">
+                        <input type="text" autocomplete="off" placeholder="Від" value="0" onchange="go()">
+                        <input type="text" autocomplete="off" placeholder="До" value="99999" onchange="go()">
+                    </div>
+                </div>
+                <div class="btn_filter_menu">
+                    <div class="btn_filter_nav">
+                        <b>Тип</b>
+                        <p>↓</p>
+                    </div>
+                    <div class="pas btn_filter_nav2 type_input">
+                        <label for="type_0"><input type="checkbox" id="type_0">Сережки</label>
+                        <label for="type_1"><input type="checkbox" id="type_1">Каблучка</label>
+                        <label for="type_2"><input type="checkbox" id="type_2">Кольє</label>
+                        <label for="type_3"><input type="checkbox" id="type_3">Браслети</label>
+                        <label for="type_4"><input type="checkbox" id="type_4">Підвіски</label>
+                    </div>
+                </div>
+                <div class="btn_filter_menu">
+                    <div class="btn_filter_nav">
+                        <b>Метал</b>
+                        <p>↓</p>
+                    </div>
+                    <div class="pas btn_filter_nav2 metal_input">
+                        <label for="metal_0"><input type="checkbox" id="metal_0">Золото</label>
+                        <label for="metal_1"><input type="checkbox" id="metal_1">Срібло</label>
+                    </div>
+                </div>
+                <div class="btn_filter_menu">
+                    <div class="btn_filter_nav">
+                        <b>Колір металу</b>
+                        <p>↓</p>
+                    </div>
+                    <div class="pas btn_filter_nav2 color_input">
+                        <label for="color_0" style="width: 100%"><input type="checkbox" id="color_0">Білий</label>
+                        <label for="color_1" style="width: 100%"><input type="checkbox" id="color_1">Жовтий</label>
+                        <label for="color_2" style="width: 100%"><input type="checkbox" id="color_2">Червоний</label>
+                    </div>
+                </div>
+                <div class="btn_filter_menu">
+                    <div class="btn_filter_nav">
+                        <b>Стать</b>
+                        <p>↓</p>
+                    </div>
+                    <div class="pas btn_filter_nav2 gender_input">
+                        <label for="gender_0"><input type="checkbox" id="gender_0">Жіночі</label>
+                        <label for="gender_1"><input type="checkbox" id="gender_1">Чоловічі</label>
+                        <label for="gender_2"><input type="checkbox" id="gender_2">Дитячі</label>
+                    </div>
+                </div>
+                <div class="btn_filter_menu">
+                    <div class="btn_filter_nav">
+                        <b>Вставки</b>
+                        <p>↓</p>
+                    </div>
+                    <div class="pas btn_filter_nav2 stone_input">
+                        <label for="st_0"><input type="checkbox" value="кварц" id="st_0">кварц</label>
+                        <label for="st_1"><input type="checkbox" value="лазурит" id="st_1">лазурит</label>
+                        <label for="st_2"><input type="checkbox" value="фианит" id="st_2">фианит</label>
+                        <label for="st_3"><input type="checkbox" value="жемчуг" id="st_3">жемчуг</label>
+                        <label for="st_4"><input type="checkbox" value="аметист" id="st_4">аметист</label>
+                        <label for="st_5"><input type="checkbox" value="топаз" id="st_5">топаз</label>
+                    </div>
+                </div>
+                <a href="/catalog" class="btn_filter" id="filter">Завантажити</a>
+            </div>
+        </div>
+        <div class="all_tovar_block">
+            {% for el in jewelry %}
+                <div class="catalog_item" data-num={{ loop.id }}>
+                    <a href="/jewelry/{{ el.id }}" class="catalog_item_a">
+                        <div>
+                            <img src="/static/cover/{{ el.image }}" alt="" class="catalog_item_img">
+                            <p class="catalog_item_title">{{ el.title }}</p>
+                        </div>
+                        <p class="catalog_item_price">{{ el.price }}грн</p>
+                    </a>
+                {% if current_user.admin %}
+                    <a href="/jewelry-update/{{ el.id }}">
+                        <img src="/static/img/res.png" alt="" class="item_update">
+                    </a>
+                {% endif %}
+                    {% if el.count == 0 %}
+                        <a href="/jewelry/{{ el.id }}">
+                        <div style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; background-color: rgba(255,255,255,0.5)"></div>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="paginator" onclick="pagination(event)"></div>
+    <script src="{{ url_for('static', filename='scripts/catalog.js') }}"></script>
+{% endblock %}

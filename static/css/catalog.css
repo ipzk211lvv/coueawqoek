@@ -1,0 +1,474 @@
+.addimageblock{
+    padding: 10px;
+}
+.addimage {
+    color: grey;
+    cursor: pointer;
+    border-radius: 5px;
+    background-size: cover;
+    background-position: center;
+    object-fit: contain;
+    width: 250px;
+    height: 250px;
+    border: 2px dashed grey;
+}
+.add_info{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+    justify-content: space-between;
+}
+.add_price_submit{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.add_price_submit input[type='submit']{
+    margin-left: 10px;
+}
+
+.add_form{
+    display: flex;
+    font-size: 22px;
+}
+.bottomline{
+    border-bottom: .1pt solid #464646;
+}
+.checkbox_block{
+    display: flex;
+    justify-content: space-between;
+}
+
+.catalog_block{
+    display: flex;
+    flex-direction: column;
+}
+.sale{
+    width: fit-content;
+    margin: 30px 10px;
+}
+.sale:first-child{
+    margin: 0 10px 30px
+}
+.sale img{
+    display: block;
+    width: 100%;
+}
+
+.filter{
+    background-color: #fcfcfc;
+    width: 100%;
+    height: 70px;
+}
+.all_tovar_block{
+    background-color: #fcfcfc;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, auto);
+
+    position: relative;
+    align-content: space-around;
+}
+@media (max-width: 1000px) {
+    .all_tovar_block{
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, auto);
+    }
+}
+@media (max-width: 700px) {
+    .all_tovar_block{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);
+    }
+}
+
+.catalog_item{
+    text-align: center;
+    margin: 10px;
+    padding-bottom: 10px;
+    border-bottom: .1pt solid grey;
+    transition: .4s;
+}
+.catalog_item:hover{
+    margin: 3px;
+    transition: .2s;
+}
+.catalog_item_a{
+    display: flex;
+    flex-direction: column;
+    color: #252B42;
+    font-size: 21px;
+    height: 100%;
+    justify-content: space-between;
+}
+.catalog_item_img{
+    display: block;
+    width: 100%;
+}
+
+.catalog_item_price{
+    font-size: 17px;
+    font-weight: lighter;
+    margin-top: 10px;
+}
+.item_update{
+    max-width: 30px;
+    padding: 3px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: rgba(255, 255, 255, 0.31);
+}
+.item_update:hover{
+    background-color: rgba(255, 255, 255, 0.61);
+    transition: .3s;
+}
+
+
+/* Jewelry Info -------------------------------------------------------------- */
+
+.jewelry_info{
+    display: flex;
+}
+@media (max-width: 895px) {
+    .jewelry_info{
+        flex-direction: column;
+    }
+}
+
+.jewelry_info_image_block{
+    width: 800px;
+    height: auto;
+    position: relative;
+}
+.jewelry_info_image_block img{
+    width: 100%;
+    display: block;
+}
+@media (max-width: 878px) {
+    .jewelry_info_image_block{
+        width: 90%;
+        margin: 20px auto;
+    }
+    .jewelry_info_image_block img {
+        display: block;
+    }
+}
+
+.jewelry_info_title{
+    width: 100%;
+    text-align: center;
+    height: border-box;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+@media (max-width: 878px) {
+    .jewelry_info_title {
+        margin-left: 0;
+        padding: 10px 25px;
+    }
+}
+.jw_title{
+    width: 100%;
+    text-align: center;
+
+    font-weight: lighter;
+
+    border-bottom: .1pt solid rgba(185, 185, 185, 0.64);
+}
+.jw_title h2{
+    font-size: 32px;
+    padding: 0 20px 20px 20px;
+}
+.jw_title h3{
+    font-size: 24px;
+    padding: 0 20px 10px 20px;
+}
+@media (max-width: 878px) {
+    .jw_title h2, .jw_title h3{
+        font-size: 35px;
+    }
+}
+
+
+.jw_info{
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: .1pt solid rgba(185, 185, 185, 0.64);
+    justify-content: space-around;
+}
+.jw_info_p{
+    font-size: 22px;
+    padding: 15px 20px;
+}
+@media (max-width: 878px) {
+    .jw_info_p{
+        font-size: 26px;
+    }
+}
+
+
+.jw_price{
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    font-weight: lighter;
+    font-size: 32px;
+}
+.jewelry_info_button{
+    display: flex;
+    justify-content: space-around;
+}
+@media (max-width: 678px){
+    .jewelry_info_button {
+        flex-direction: column;
+    }
+}
+.jw_button{
+    display: block;
+    padding: 12px 5px;
+    width: 45%;
+    font-size: 18px;
+    transition: .3s;
+    cursor: pointer;
+}
+@media (max-width: 678px){
+    .jw_button {
+        font-size: 24px;
+        width: 80%;
+        margin: 10px auto;
+    }
+}
+
+
+
+
+/*---------index---------*/
+
+
+.catalog{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+.catalog__item{
+    height: 200px;
+    width: 200px;
+    flex: 160px;
+    background-size: cover;
+    color: white;
+    font-size: 20px;
+    font-weight: lighter;
+    font-family: "Calibri Light";
+    cursor: pointer;
+    transition: .1s;
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+}
+@media (max-width: 955px) {
+    .catalog__item{
+        flex: 210px;
+    }
+}
+@media (max-width: 515px) {
+    .catalog__item{
+        width: 100px;
+        height: 120px;
+        flex: 100px;
+    }
+}
+.catalog__item{
+
+}
+
+.catalog__item:hover{
+    filter: brightness(0.9);
+}
+.catalog__item:hover .catalog__item_div{
+    border: .1pt solid white;
+}
+.catalog__item_div{
+    height: 100%;
+    text-align: center;
+    position: relative;
+}
+.catalog__item_div:hover{
+}
+.catalog__item_div:hover a{
+    border: .1pt solid white;
+    transition: .3s;
+}
+.catalog__item_div a{
+    padding: 5px 20%;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    transition: .3s;
+}
+.catalog__item_div a:hover{
+    background-color: white;
+    color: #464646;
+}
+
+
+
+/*------------------------FILTER---------------------------*/
+
+.filter{
+    position: relative;
+    z-index: 2;
+    font-family: system-ui;
+}
+.btn_filter{
+    width: 250px;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: .3s;
+    position: relative;
+    text-align: center;
+}
+
+.btn_filter_menu{
+    border-bottom: .1pt solid #252B42;
+}
+.btn_filter_menu p:last-child{
+    transition: .6s;
+}
+.btn_filter_menu:hover p:last-child{
+    transform: rotate(30deg);
+    transition: .1s;
+}
+.act{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    background-color: white;
+    color: #464646;
+    width: 250px;
+    padding: 10px;
+    font-size: 20px;
+    text-align: left;
+    border: .1pt solid #464646;
+
+
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.act a{
+    display: block;
+    color: #464646;
+    padding: 10px;
+    font-size: 18px;
+    border: .1pt solid #464646;
+    width: 100%;
+    text-align: center;
+    transition: .3s;
+}
+.act a:hover{
+    color: white;
+    background-color: #464646;
+}
+
+.pas{
+    display: none;
+}
+.btn_filter_menu{
+    margin: 10px 0;
+}
+
+.btn_filter_nav{
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 10px 0 0;
+}
+.btn_filter_nav b{
+    font-weight: 400;
+    font-size: 22px;
+}
+.btn_filter_nav2{
+    padding: 3px;
+}
+.btn_filter_nav2 label{
+    display: inline-block;
+    width: 105px;
+}
+.btn_filter_nav2 input[type=text]{
+    padding: 10px;
+    width: 45%;
+    border: .1pt solid #252B42;
+}
+.btn_filter_nav2 input[type=checkbox]{
+    margin-right: 3px;
+}
+.active{
+    display: block;
+    font-size: 20px;
+    text-align: left;
+
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+    transform: translate(0, 0);
+    opacity: 1;
+}
+
+
+
+/*----------PAGINAT--------*/
+.catalog_item {
+    display: none;
+    position: relative;
+}
+.paginator {
+    margin-top: 20px;
+    line-height: 150%;
+    width: 100%;
+    text-align: center;
+}
+.paginator > span {
+    display: inline-block;
+    margin: 0 5px 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+
+    padding: 12px 0;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    transition: .2s;
+}
+.paginator_pas{
+    background-color: white;
+    border: .1pt solid #464646;
+    color: #464646;
+}
+.paginator_active {
+    background-color: #464646;
+    border: .1pt solid white;
+    color: white;
+}
+
+.paginator > span:hover{
+    background-color: #464646;
+    color: white;
+}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ninja jewelry
+{% endblock%}
+
+{% block body %}
+<div style="width: 100%;">
+    <div class="catalog_block">
+        <div class="sale">
+            <img src="{{ url_for('static', filename='img/sale.jpg') }}" alt="">
+        </div>
+        <div class="catalog">
+            <button class="catalog__item" style="background-image: url('/static/img/se.jpg');">
+                <div class="catalog__item_div">
+                    <a href="/catalog/Сережки&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">
+                        Сережки
+                    </a>
+                </div>
+            </button>
+            <button class="catalog__item" style="background-image: url('/static/img/ka.jpg');">
+                <div class="catalog__item_div">
+                    <a href="/catalog/Каблучка&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">
+                        Каблучки
+                    </a>
+                </div>
+            </button>
+            <button class="catalog__item" style="background-image: url('/static/img/br.jpg');">
+                <div class="catalog__item_div">
+                    <a href="/catalog/Браслети&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">
+                        Браслети
+                    </a>
+                </div>
+            </button>
+            <button class="catalog__item" style="background-image: url('/static/img/ko.jpg');">
+                <div class="catalog__item_div">
+                    <a href="/catalog/Кольє&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">
+                        Кольє
+                    </a>
+                </div>
+            </button>
+            <button class="catalog__item" style="background-image: url('/static/img/po.jpg');">
+                <div class="catalog__item_div">
+                    <a href="/catalog/Підвіски&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">
+                        Підвіски
+                    </a>
+                </div>
+            </button>
+        </div>
+        <div class="sale">
+            <img src="{{ url_for('static', filename='img/sale2.png') }}" alt="">
+        </div>
+        <h2 style="font-size: 30px; padding: 0 30px 0 15px; ">Новинки</h2>
+        <div class="all_tovar_block">
+            {% for el in jewelry[:4] %}
+                <div class="catalog_item" style="display: block;">
+                    <a href="/jewelry/{{ el.id }}" class="catalog_item_a">
+                        <div>
+                            <img src="/static/cover/{{ el.image }}" alt="" class="catalog_item_img">
+                            <p class="catalog_item_title">{{ el.title }}</p>
+                        </div>
+                        <p class="catalog_item_price">{{ el.price }}грн</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="/catalog" style="width: 100%; display: block; text-align: center; padding: 10px; color: #464646">Більше</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ jewelry.title }}
+{% endblock%}
+
+{% block body %}
+    <div class="jewelry_info">
+        <div class="jewelry_info_image_block">
+            <img src="/static/cover/{{ jewelry.image }}" alt="">
+            {% if current_user.admin %}
+                <a href="/jewelry-update/{{ jewelry.id }}">
+                    <img src="/static/img/res.png" alt="" class="item_update" style="max-width: 40px;">
+                </a>
+            {% endif %}
+        </div>
+        <div class="jewelry_info_title">
+            <div class="jw_title">
+                {% if jewelry.title|length < 60 %}
+                    <h2>{{ jewelry.title }}</h2>
+                    {% else %}
+                    <h3>{{ jewelry.title }}</h3>
+                {% endif %}
+            </div>
+            <div class="jw_info">
+                <div class="jw_info_p">
+                    <p>Вид металу:</p>
+                    <p>{{ jewelry.metal }}</p>
+                </div>
+                {% if jewelry.proba %}
+                <div class="jw_info_p">
+                    <p>Проба:</p>
+                    <p>{{ jewelry.proba }}</p>
+                </div>
+                {% endif %}
+                {% if jewelry.metal_color and jewelry.metal != 'Срібло' %}
+                <div class="jw_info_p">
+                    <p>Колір металу:</p>
+                    <p>{{ jewelry.metal_color }}</p>
+                </div>
+                {% endif %}
+                {% if jewelry.gender %}
+                    <div class="jw_info_p">
+                        <p>Стать:</p>
+                        <p>{{ jewelry.gender }}</p>
+                    </div>
+                {% endif %}
+                <div class="jw_info_p">
+                    {% if jewelry.stones %}
+                        <p>Вставки:</p>
+                        <ul>
+                            {% for key in jewelry.stones.split(';') %}
+                                <li>{{ key }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>Вставки:</p>
+                        <p>Вставок немає</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% if jewelry.count <= 0 %}
+                <ul style="width: fit-content; margin: 0 auto; font-size: 20px">
+                    <li style="list-style-type: disc;">Немає в наявності</li>
+                </ul>
+            {% endif %}
+            <div class="jw_price">
+                <p>{{ jewelry.price }}грн</p>
+            </div>
+            <div class="jewelry_info_button">
+                {% if current_user.is_authenticated %}
+                    <form id="form" class="jw_button btn_full" data-user="{{ current_user.id }}" data-jw="{{ jewelry.id }}">
+                        {% set i = namespace(found=false) %}
+                        {% for cart_ in cart %}
+                            {% if cart_.id == current_user.id %}
+                                {% if cart_.array_cart.count(jewelry.id|string+':'|string) %}
+                                    ✓ В кошику
+                                    {% set i.found = True %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if not i.found %}
+                            + В кошик
+                        {% endif %}
+                    </form>
+                    {% else %}
+                    <button class="jw_button btn_full" id="no_user_cart" onclick="document.getElementById('popup-a').click()">Необхідно війти</button>
+                {% endif %}
+                <a href="/buy/{{ jewelry.id }}+1" class="jw_button btn_border">
+                    Швидке замовлення
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="div"></div>
+        {% endif %}
+    {% endwith %}
+    <script src="{{ url_for('static', filename='scripts/jewerly_info.js') }}"></script>
+{% endblock %}

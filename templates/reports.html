@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ report.title }}
+{% endblock%}
+
+{% block body %}
+    <div class="report_block">
+        <p class="report_block_title">Тема: {{ report.title }}</p>
+        {% if report.answer != 'error' %}
+            <p class="report_block_problem">{{ report.problem }}</p>
+            {% else %}
+            <p class="report_block_problem">{{ report.problem[:23] }}
+                <a href="{{ report.problem[23:] }}" style="color: white; text-decoration: underline;">
+                    {{ report.problem[23:] }}
+                </a>
+            </p>
+        {% endif %}
+        {% if current_user.admin %}
+            {% if not report.answer %}
+                <form method="post" class="btn_enter">
+                    <input type="text" name="answer" placeholder="Відповідь..." autocomplete="off">
+                    <button class="btn_report">
+                        <img src="{{ url_for('static', filename='img/enter.png') }}" alt="" class="enter">
+                    </button>
+                </form>
+            {% elif report.answer == 'error' %}
+                <p class="report_otvet" style="background-color: #464646">
+                    <a href="/report/del/{{ report.id }}" style="color: white;">
+                        Видалити
+                    </a>
+                </p>
+            {% else %}
+                <p class="report_otvet">{{ report.answer }}</p>
+            {% endif %}
+        {% else %}
+            {% if report.answer %}
+                <p class="report_otvet">{{ report.answer }}</p>
+                {% else %}
+                <p class="report_otvet">На ваше питання ще не відповіли</p>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

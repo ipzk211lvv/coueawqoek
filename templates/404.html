@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Сторінку не знайдено{% endblock %}
+
+{% block body %}
+    <style>
+        .img_404{
+            border-radius: 15px;
+            display: block;
+            background-image: url("/static/img/404.gif");
+            width: 100%;
+            height: 500px;
+            background-size: cover;
+            position: relative;
+            text-align: center;
+        }
+        .img_404 label{
+            padding: 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: block;
+            font-size: 60px;
+            color: #ffffff;
+            margin: 0 -50% 0 0;
+            transform: translate(-50%, -50%);
+            background-color: rgba(70, 70, 70, 0.46);
+        }
+        .img_404 label:last-child{
+            top: 463px;
+            font-size: 27px;
+        }
+        .er{
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+            display: block;
+            color: #252B42;
+            background-color: white;
+        }
+    </style>
+    <div style="margin: 15px auto; max-width: 600px">
+        <a href="{{ url_for('index') }}" class="img_404">
+            <label>404 :(</label>
+            <label>Сторінку не знайдено. Натисніть щоб повернутися назад</label>
+        </a>
+        {% if current_user.is_authenticated %}
+            <a href="/error-report/{{ request.url.replace('/', '$') }}+404" class="er">Повідомити про помилку</a>
+        {% endif %}
+    </div>
+{% endblock %}

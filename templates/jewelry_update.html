@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Додати товар
+{% endblock%}
+
+{% block body %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages and messages[0][0] == 'add' %}
+            <div class="error-message" id="message-{{ messages[0][0] }}">{{ messages[0][1] }}</div>
+        {% endif %}
+    {% endwith %}
+
+    <form method="post" enctype="multipart/form-data" class="jewelry_info" id="add_form">
+            <div class="jewelry_info_image_block">
+                <img src="/static/cover/{{ jewelry.image }}" alt="">
+            </div>
+            <div class="jewelry_info_title">
+                <div class="jw_title">
+                    <input type="text" name="title" class="bottomline" style="width: 90%; font-size: 25px; margin-bottom: 5%" value="{{ jewelry.title }}">
+                </div>
+                <div class="jw_info">
+                    <div class="jw_info_p">
+                        <p>Тип:</p>
+                        <select form="add_form" name="type">#}
+                            <option>Каблучка</option>
+                            <option>Сережки</option>
+                            <option>Кольє</option>
+                            <option>Браслети</option>
+                            <option>Підвіски</option>
+                        </select>
+                    </div>
+                    <div class="jw_info_p">
+                        <p>Вид металу:</p>
+                         <select form="add_form" name="metal">
+                             {% if jewelry.metal == 'Золото' %}
+                                <option>Золото</option>
+                                <option>Срібло</option>
+                             {% else %}
+                                <option>Срібло</option>
+                                <option>Золото</option>
+                             {% endif %}
+                         </select>
+                    </div>
+                    {% if jewelry.proba %}
+                    <div class="jw_info_p">
+                        <p>Проба:</p>
+                        <input type="text" name="proba" placeholder="0-999" class="bottomline" value="{{ jewelry.proba }}" style="width: 70%; text-align: center">
+                    </div>
+                    {% endif %}
+                    <div class="jw_info_p">
+                        <p>Колір металу:</p>
+                        <select form="add_form" name="metal_color">
+                            <option>Білий</option>
+                            <option>Жовтий</option>
+                            <option>Червоний</option>
+                        </select>
+                    </div>
+                    {% if jewelry.gender %}
+                        <div class="jw_info_p">
+                            <p>Стать:</p>
+                            <select form="add_form" name="gender">
+                                <option>Жіночі</option>
+                                <option>Чоловічі</option>
+                                <option>Дитячі</option>
+                            </select>
+                        </div>
+                    {% endif %}
+                    <div class="jw_info_p">
+                        <p>Вставки:</p>
+                        <div class="add__checkbox_block">
+                            <label class="checkbox_block" style="margin: 5%; display: flex; justify-content: space-between;position: relative;">Вставки:
+                                <div style="display: flex"> <label for="checkbox1"><input type="checkbox" value="кварц" id="checkbox1">кварц</label></div>
+                                <div style="display: flex"><label for="checkbox2"><input type="checkbox" value="лазурит" id="checkbox2">лазурит</label></div>
+                                <div style="display: flex"><label for="checkbox3"><input type="checkbox" value="фианит" id="checkbox3">фианит</label></div>
+                                <div style="display: flex"><label for="checkbox4"><input type="checkbox" value="жемчуг" id="checkbox4">жемчуг</label></div>
+                                <div style="display: flex"><label for="checkbox5"><input type="checkbox" value="аметист" id="checkbox5">аметист</label></div>
+                                <div style="display: flex"><label for="checkbox6"><input type="checkbox" value="топаз" id="checkbox6">топаз</label></div>
+                            </label>
+                            <label style="display: none"><input type="text" id="stone" name="stone"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="jw_price" style="display: flex; justify-content: space-between">
+                    <div><input type="text" name="price" class="bottomline" value="{{ jewelry.price }}">грн</div>
+                    <input type="text" name="count" class="bottomline" placeholder="Кількість" style="width: 80px" value="{{ jewelry.count }}">
+                </div>
+                <div class="jewelry_info_button">
+                    <input type="submit" class="jw_button btn_full" value="Оновити">
+                    <a href="/delete/{{ jewelry.id }}" class="jw_button btn_border" style="background-color: rgba(255,0,0,0.5); color: white">
+                        Видалити
+                    </a>
+                </div>
+            </div>
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#    <form method="post" enctype="multipart/form-data" class="add_form" id="add_form">#}
+{#        <div class="addimageblock">#}
+{#            <input id="imagefile" type="button" class="addimage" onclick="document.getElementById('image').click();" style="background-image: url({{ '/static/cover/' + jewelry.id|string + '.jpg' }}); border: none">#}
+{#            <input onchange="loadFile(event)" id="image" type="file" name="image" style="display: none;"/>#}
+{#        </div>#}
+{#        <div class="add_info">#}
+{#            <label>Заголовок: <input type="text" name="title" class="bottomline" style="width: 50%" value="{{ jewelry.title }}"></label>#}
+{#            <div>#}
+{#                <label>Тип:#}
+{#                    <select form="add_form" name="type">#}
+{#                        <option>Каблучка</option>#}
+{#                        <option>Сережки</option>#}
+{#                        <option>Кольє</option>#}
+{#                        <option>Браслети</option>#}
+{#                        <option>Підвіски</option>#}
+{#                    </select>#}
+{#                </label>#}
+{#            </div>#}
+{#            <div>#}
+{#                <label>Метал:#}
+{#                    <select form="add_form" name="metal">#}
+{#                        <option>Золото</option>#}
+{#                        <option>Срібло</option>#}
+{#                    </select>#}
+{#                </label>#}
+{#            </div>#}
+{#            <label>Проба: <input type="text" name="proba" placeholder="0-999" class="bottomline" value="{{ jewelry.proba }}"></label>#}
+{#            <div>#}
+{#                <label>Колір металу:#}
+{#                    <select form="add_form" name="metal_color">#}
+{#                        <option>Білий</option>#}
+{#                        <option>Жовтий</option>#}
+{#                        <option>Червоний</option>#}
+{#                    </select>#}
+{#                </label>#}
+{#            </div>#}
+{#            <div class="add__checkbox_block">#}
+{#                <label class="checkbox_block">Вставки:#}
+{#                    <label for="checkbox1"><input type="checkbox" value="кварц" id="checkbox1">кварц</label>#}
+{#                    <label for="checkbox2"><input type="checkbox" value="лазурит" id="checkbox2">лазурит</label>#}
+{#                    <label for="checkbox3"><input type="checkbox" value="фианит" id="checkbox3">фианит</label>#}
+{#                    <label for="checkbox4"><input type="checkbox" value="жемчуг" id="checkbox4">жемчуг</label>#}
+{#                    <label for="checkbox5"><input type="checkbox" value="аметист" id="checkbox5">аметист</label>#}
+{#                    <label for="checkbox6"><input type="checkbox" value="топаз" id="checkbox6">топаз</label>#}
+{#                </label>#}
+{#                <label style="display: none"><input type="text" id="stone" name="stone"></label>#}
+{#            </div>#}
+{#            <label>Стать:#}
+{##}
+{#            </label>#}
+{#            <div class="add_price_submit">#}
+{#                <label>Ціна(грн): <input type="text" name="price" class="bottomline" value="{{ jewelry.price }}"></label>#}
+{#                <input type="text" name="count" class="bottomline" placeholder="Кількість" style="width: 80px" value="{{ jewelry.count }}">#}
+{#                <input type="submit" class="btn_border btn_bf" value="Оновити">#}
+{#            </div>#}
+{#        </div>#}
+{#    </form>#}
+
+    <script src="{{ url_for('static', filename='scripts/add.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/jewerly_info.js') }}"></script>
+{% endblock %}

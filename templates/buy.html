@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Оформлення замаовлення{% endblock %}
+
+{% block body %}
+    <div style="display: flex; flex-direction: column">
+        <h2 style="margin: 0 auto; padding: 7px; font-size: 20px">Оформлення замовлення</h2>
+        <form action="/buy-jewelry" method="post" class="buy_form">
+            <div class="buy_form_name">
+                <input type="text" name="name" class="input_block" placeholder="Ім'я" style="width: 40%" value="{{ current_user.name }}">
+                <input type="text" name="surname" class="input_block" placeholder="Прізвище" style="width: 40%" value="{{ current_user.surname }}">
+            </div>
+            Пошта: <input type="email" value="{{ current_user.email }}" name="email">
+            Телефон: <input type="text" value="+38"  name="telephone">
+            Адреса: <input type="text" value="{{ current_user.address }}" name="address">
+            <div style="display: flex; align-items: center; justify-content: space-between">
+                <span style="font-size: 20px">Сумма: {{ price }}</span>
+                <input type="submit" value="Оплатити" class="btn_border btn_bf" style="margin-bottom: 0;">
+            </div>
+            <input type="text" id="hreff" name="jewelry" style="display: none">
+        </form>
+    </div>
+    <script>
+        document.getElementById('hreff').value = window.location.pathname.slice(5);
+    </script>
+{% endblock %}

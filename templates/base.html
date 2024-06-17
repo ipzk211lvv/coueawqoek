@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/burger.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header_footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/popup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_info.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/catalog.css') }}">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="q"></div>
+    <script src="{{ url_for('static', filename='scripts/popup.js') }}"></script>
+    <header class="header">
+        <div class="header__container">
+            <div class="header_up _container">
+                <div>
+                    <div class="hamburger-menu">
+                        <input id="menu__toggle" type="checkbox" style="display: none"/>
+                        <label class="menu__btn" for="menu__toggle">
+                            <span></span>
+                        </label>
+                        <ul class="menu__box">
+                            <li><a class="menu__item" href="{{ url_for('catalog') }}">Всі товари</a></li>
+                            <li><a class="menu__item" href="/catalog/Сережки&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">Сережки</a></li>
+                            <li><a class="menu__item" href="/catalog/Каблучка&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">Каблучки</a></li>
+                            <li><a class="menu__item" href="/catalog/Браслети&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">Браслети</a></li>
+                            <li><a class="menu__item" href="/catalog/Кольє&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">Кольє</a></li>
+                            <li><a class="menu__item" href="/catalog/Підвіски&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">Підвіски</a></li>
+                        </ul>
+                    </div>
+                    <div class="telephone">
+                        <span class="header_telephone">0 800 33 5747</span>
+                        <div class="telephone_icon">
+                            <img src="{{ url_for('static', filename='img/telephone.png') }}" alt="" class="header_img">
+                        </div>
+                    </div>
+                </div>
+                <div class="header_logo">
+                    <a href="/">
+                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" class="header_logo_img">
+                    </a>
+                </div>
+                <div class="header_account">
+                    <div class="header_acc">
+                        <a href="{{ url_for('cart') }}">
+                            <img src="{{ url_for('static', filename='img/korz.png') }}" alt="" class="header_img">
+                        </a>
+                    </div>
+                    <div class="header_acc dropdown">
+                        <img src="{{ url_for('static', filename='img/acc.png') }}" alt="" class="header_img dropbtn">
+                        <div class="dropdown-content">
+                            {% if current_user.is_authenticated %}
+                                <label>{{ current_user.name }} {{ current_user.surname }}</label>
+                                {% if current_user.admin %}
+                                    <a href="{{ url_for('admin.index') }}">Admin</a>
+                                {% endif %}
+                                <a href="/user/{{ current_user.id }}">Профіль</a>
+                                <a href="{{ url_for('logout') }}">Вихід</a>
+                            {% else %}
+                                <a href="#popup" class="popup-link" id="popup-a">Вхід</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header_bottom">
+                <ul class="header_ul _container">
+                    <li><a class="header_btn" href="/">Головна</a></li>
+                    <li><a class="header_btn" href="{{ url_for('catalog') }}">Всі товари</a></li>
+                    <li><a class="header_btn" href="/catalog/Сережки&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">Сережки</a></li>
+                    <li><a class="header_btn" href="/catalog/Каблучка&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">Каблучки</a></li>
+                    <li><a class="header_btn" href="/catalog/Браслети&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">Браслети</a></li>
+                    <li><a class="header_btn" href="/catalog/Кольє&Золото+Срібло&Білий+Жовтий+Червоний&Жіночі+Чоловічі+Дитячі&0+99999&&">Кольє</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="main__container _container">
+            {% block body %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container _container">
+            <div class="footer_info">
+                <div class="footer_logo_text">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" class="footer_logo">
+                    <div>
+                       <p>Copyrights © 2022 Possibly, all rights reserved</p>
+                    </div>
+                </div>
+                <div>
+                    <ul class="ul_1">
+                        <li>Про нас</li>
+                        <li>Доставка і Оплата</li>
+                        <li>Повернення та обмін</li>
+                        <li>Питання-відповіді</li>
+                        <li>Контакти</li>
+                        <li>Карта сайту</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="ul_2">
+                        <li>Прийом дзвінків:</li>
+                        <li>Пн-Пт (09:00 - 19:00)</li>
+                        <li>Cб (10:00 - 18:00)</li>
+                        <li>Нд (10:00 - 17:00)</li>
+                    </ul>
+                </div>
+                <div class="text">
+                    <div>
+                        <p>0 800 33 5747</p>
+                    </div>
+                    <div class="footer_icon">
+                        <img src="{{ url_for('static', filename='img/vk.png') }}" alt="" class="icon">
+                        <img src="{{ url_for('static', filename='img/tg.png') }}" alt="" class="icon">
+                        <img src="{{ url_for('static', filename='img/inst.png') }}" alt="" class="icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <div id="popup" class="popup">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="#" class="popup__close close-popup">
+                    <img src="{{ url_for('static', filename='img/x.png') }}" alt="">
+                </a>
+                <div class="popup__title">
+                    РЕЄСТРАЦІЯ
+                </div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages and (messages[0][0] == 'reg' or messages[0][0] == 'log') %}
+                        <div class="error-message" id="message-{{ messages[0][0] }}">{{ messages[0][1] }}</div>
+                    {% endif %}
+                {% endwith %}
+                <form action="{{ url_for('register') }}" method="post" class="form_login" id="login_form">
+                    <div class="popup__form">
+                        <label><input type="text" id="name" name="name" placeholder="Ім'я" class="form_btn" autocomplete="off" pattern="^[a-zA-ZА-Яа-яЁё]+$"></label>
+                        <label><input type="text" id="surname" name="surname" placeholder="Прізвище" class="form_btn" autocomplete="off"></label>
+                        <label><input type="email" id="email" name="email" placeholder="Email" class="form_btn" autocomplete="off"></label>
+                        <label><input type="password" id="password" name="password" placeholder="Пароль" class="form_btn" autocomplete="off" minlength="4"></label>
+                        <label><input type="password" id="password2" name="password2" placeholder="Підтвердіть пароль" class="form_btn" autocomplete="off" minlength="4"></label>
+                    </div>
+                    <input type="submit" value="СТВОРИТИ АККАУНТ" class="form__submit submit" id="submit">
+                </form>
+                <div class="form_line"></div>
+                <a onclick="formRevers()" id="onclick_a"><div class="form__nosubmit submit">УВІЙТИ В АКАУНТ</div></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

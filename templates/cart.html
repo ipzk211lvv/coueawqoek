@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Кошик
+{% endblock%}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages and messages[0][0] == 'cart' %}
+            <div id="message-cart">{{ messages[0][1] }}
+                <a href="{{ 'report' }}">| Якщо ви вважаете що сталася помилка напишіть нам</a>
+            </div>
+        {% endif %}
+    {% endwith %}
+    <form method="post" id="cart_form">
+        <div class="cart_all_block">
+        {% for cart_ in cart if cart_[0] == current_user.id %}
+            {% for jewelry_id, jewelry_count in cart_[1] %}
+                {% for el in jewelry if el.id == jewelry_id %}
+                    <div class="cart_one_block" id="block-{{ jewelry_id }}">
+                        <div class="cart_img">
+                            <img src="/static/cover/{{ el.image }}" alt="">
+                        </div>
+                        <div class="cart_info">
+                            <div class="checkbox_info">
+                                <a href="/jewelry/{{ el.id }}" style="width: 90%; position: relative">{{ el.title }}</a>
+                                <div class="checkbox">
+                                    <input checked type="checkbox" data-id="{{ jewelry_id }}" id="ch{{ jewelry_id }}" class="checkbox_cart">
+                                    <label for="ch{{ jewelry_id }}" class="label_cart"></label>
+                                </div>
+                            </div>
+                            <div class="plusmin">
+                                <label class="plusmin_count"><p>Кількість: <label class="count" id="count-{{ jewelry_id }}">{{ jewelry_count }}</label></p></label>
+                                <label class="plus_min no-select" onclick="update('+', {{ jewelry_id }}, {{ el.price }})">+</label>
+                                <label class="plus_min no-select" onclick="update('-', {{ jewelry_id }}, {{ el.price }})">-</label>
+                            </div>
+                            <p id="price-{{ jewelry_id }}">Ціна: {{ el.price|int*jewelry_count|int }}грн</p>
+                            <div class="cart_btn">
+                                <label class="btn_full btn_bf no-select" onclick="cart_del({{ jewelry_id }})">Видалити</label>
+                                <a href="/buy/{{ jewelry_id }}+{{ jewelry_count }}" class="btn_border btn_bf no-select" id="buy-{{ jewelry_id }}">Замовити</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+        </div>
+        <div class="cart_buy_all">
+            <a href="" class="btn_bf btn_border" id="cart_buy_all"></a>
+        </div>
+        <div class="not_cart" id="not_cart">
+            <img src="{{ url_for('static', filename='img/cart.png') }}" alt="">
+        </div>
+        <input type="text" style="display: none" name="array_cart" id="array_cart">
+        <input type="text" style="display: none" name="user_id" value="{{ current_user.id }}">
+        <input type="button" id="btn" value="Отправить" style="display: none;"/>
+    </form>
+    <script src="{{ url_for('static', filename='scripts/cart.js') }}"></script>
+{% endblock %}

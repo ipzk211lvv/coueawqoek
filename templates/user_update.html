@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Профіль
+{% endblock%}
+
+{% block body %}
+    <div class="window_update">
+        <form action="" method="post" class="form_update">
+            <label>Ім'я: <input type="text" name="name" value="{{ user.name }}"></label>
+            <label>Прізвище: <input type="text" name="surname" value="{{ user.surname }}"></label>
+            <label>Пошта: <input type="text" name="email" value="{{ user.email }}"></label>
+<!--            <label>Пароль: <input type="text" name="password" placeholder="Новий пароль"></label>-->
+            <label>Адреса: <textarea name="address" rows="1" oninput="auto_grow(this)">{% if user.address %}{{ user.address }}{% endif %}</textarea></label>
+            <button type="submit" class="user_info_btn">Зберігти</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='scripts/user_update.js') }}"></script>
+{% endblock %}

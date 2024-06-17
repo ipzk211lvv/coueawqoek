@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Профиль
+{% endblock%}
+
+{% block body %}
+    <div class="user_info">
+        <div class="user_info_nav">
+            <label for="profile"><input type="radio" id="profile" name="user_info_nav_radio" checked>Профіль</label>
+            {% if current_user.admin %}
+                <label for="block3"><input type="radio" id="block3" name="user_info_nav_radio">Admin</label>
+                {% else %}
+                <label for="block3"><input type="radio" id="block3" name="user_info_nav_radio">Детальніше</label>
+            {% endif %}
+            <label for="block4"><input type="radio" id="block4" name="user_info_nav_radio">Підтримка</label>
+            <label for="block5"><input type="radio" id="block5" name="user_info_nav_radio">Замовлення</label>
+        </div>
+        <div class="user_info_content">
+            <div class="user_info_content_block" style="justify-content: space-between;">
+                <label><b>Ім'я: </b>{{ user.name }}</label>
+                <label><b>Прізвище: </b>{{ user.surname }}</label>
+                <label><b>Пошта: </b>{{ user.email }}</label>
+
+                <label><b>Адреса доставки: </b>
+                {% if user.address %}
+                    {{ user.address }}
+                    {% else %}
+                    Не вказано
+                {% endif %}
+                </label>
+
+                <a href="/user/{{ user.id }}/update" class="user_info_btn">
+                    <img src="{{ url_for('static', filename='img/res.png') }}" alt="">
+                    Редагувати
+                </a>
+            </div>
+            <div class="user_info_content_block" style="justify-content: space-between;">
+                {% if current_user.admin %}
+                    <a href="{{ url_for('add') }}" class="user_info_btn">Добавить товар</a>
+                    <a href="{{ url_for('add') }}" class="user_info_btn">Удалить товары</a>
+                    <a href="{{ url_for('add') }}" class="user_info_btn">Изменить товары</a>
+                {% else %}
+                    Поле для чего-то важного
+            {% endif %}
+            </div>
+            {% if current_user.admin %}
+                <div class="user_info_content_block">
+                     <div class="pidtrimka">
+                         <p>Тема</p>
+                         <p>Користувач</p>
+                         <p>Статус</p>
+                     </div>
+                    {% if report %}
+                        {% for i in report %}
+                            {% if i.answer != 'error' %}
+                                <a href="/report/{{ i.id }}" class="pidtrimka_a">
+                                    <div class="pidtrimka">
+                                        <p>{{ i.title }}</p>
+                                        <p>{{ i.user }}</p>
+                                        {% if i.answer %}
+                                            <p>✓Питання закрите</p>
+                                            {% else %}
+                                            <p>Питання відкрите</p>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                {% else %}
+                                <a href="/report/{{ i.id }}" class="pidtrimka_a" style="background-color: darkred;">
+                                    <div class="pidtrimka">
+                                        <p>{{ i.title }}</p>
+                                        <p>-</p>
+                                        <p>{{ i.date }}</p>
+                                    </div>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {% else %}
+                    <div class="user_info_content_block">
+                    <a href="/report" class="user_info_btn">Задати питання</a>
+                    {% if report %}
+                        {% for i in report if i.user == current_user.email %}
+                            <a href="/report/{{ i.id }}" class="pidtrimka_a">
+                                <div class="pidtrimka">
+                                    <p>{{ i.title }}</p>
+                                    {% if i.answer %}
+                                        <p>✓Питання закрите</p>
+                                        {% else %}
+                                        <p>Питання відкрите</p>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endif %}
+            <div class="user_info_content_block">
+                {% if current_user.admin %}
+                    <div style="display: flex; justify-content: space-between">
+                        <div class="admin_order_block" style="border: none; width: 100%">
+                            <p style="width: 85px">Зображення</p>
+                            <p style="width: 85px">Тип</p>
+                            <p style="width: 80px">Кількість</p>
+                            <p style="width: 200px">Користувач</p>
+                            <p style="width: 80px">Ціна</p>
+                            <div style="width: 91px"></div>
+                        </div>
+                    </div>
+
+                    {% for el in orders if orders and not el.status %}
+                        <div style="display: flex; justify-content: space-between">
+                            <div class="one_order">
+                                <div style="display: flex; flex-direction: column; text-align: center">
+                                    {% for i in jw %}
+                                        {% for j in jw[i] if el.id == i %}
+                                            <p style="width: 85px">
+                                                <img src="/static/cover/{{ j }}.jpg" alt="" class="admin_order_img">
+                                            </p>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="one_order">
+                                <div style="display: flex; flex-direction: column; text-align: center">
+                                    {% for i in jw %}
+                                        {% for j in jw[i] if el.id == i %}
+                                            {% for q in jewelry if q.id == j %}
+                                                <p style="margin: auto 0; width: 85px">{{ q.type }}</p>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="one_order">
+                                <div style="display: flex; flex-direction: column; text-align: center">
+                                    {% for i in jw if el.id == i %}
+                                        {% for j in jw[i] %}
+                                            <p style="width: 85px; margin: auto 0">x{{ jw[i][j] }}</p>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="one_order" style="text-align: center">
+                                <p style="margin: auto 0; width: 200px">{{ el.email }}</p>
+                            </div>
+                            <div class="one_order" style="text-align: center">
+                                <p style="margin: auto 0; width: 80px">{{ el.price }}</p>
+                            </div>
+                            <form action="/order/{{ el.id }}" method="post" class="one_order">
+                                <input type="submit" value="Відправити" class="one_order_submit">
+                            </form>
+                        </div>
+                    {% endfor %}
+
+                {% else %}
+                    <div style="display: flex;">
+                        <div class="admin_order_block" style="border: none; width: 100%">
+                            <p style="width: 85px">Зображення</p>
+                            <p style="width: 85px">Тип</p>
+                            <p style="width: 80px">Кількість</p>
+                            <p style="width: 90px">Ціна</p>
+                            <p style="width: 120px">Дата замовлення</p>
+                            <p style="width: 150px">Статус</p>
+                        </div>
+                    </div>
+
+                    {% for el in orders if orders and el.email == current_user.email %}
+                        <div style="display: flex; justify-content: space-between">
+                            <div class="one_order">
+                                <div style="display: flex; flex-direction: column; text-align: center">
+                                    {% for i in jw %}
+                                        {% for j in jw[i] if el.id == i %}
+                                            <p style="width: 85px">
+                                                <img src="/static/cover/{{ j }}.jpg" alt="" class="admin_order_img">
+                                            </p>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="one_order">
+                                <div style="display: flex; flex-direction: column; text-align: center">
+                                    {% for i in jw %}
+                                        {% for j in jw[i] if el.id == i %}
+                                            {% for q in jewelry if q.id == j %}
+                                                <p style="margin: auto 0; width: 85px">{{ q.type }}</p>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="one_order">
+                                <div style="display: flex; flex-direction: column; text-align: center">
+                                    {% for i in jw if el.id == i %}
+                                        {% for j in jw[i] %}
+                                            <p style="width: 80px; margin: auto 0">x{{ jw[i][j] }}</p>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="one_order" style="text-align: center">
+                                <p style="margin: auto 0; width: 90px">{{ el.price }}</p>
+                            </div>
+                            <div class="one_order" style="text-align: center">
+                                <p style="margin: auto 0; width: 120px">{{ el.date_reg }}</p>
+                            </div>
+                            <div class="one_order" style="text-align: center">
+                                {% if el.status %}
+                                    <p style="margin: auto 0; width: 150px; color: #00a200">Відправлено</p>
+                                    {% else %}
+                                    <p style="margin: auto 0; width: 150px;">Очікуєтся відправлення</p>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+<script src="{{ url_for('static', filename='scripts/user_info.js') }}"></script>
+{% endblock %}

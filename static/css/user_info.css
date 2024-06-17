@@ -1,0 +1,272 @@
+.user_info{
+    display: flex;
+    border: .1pt solid #464646;
+    border-radius: 7px;
+    padding: 10px;
+}
+
+.user_info_nav{
+    min-width: fit-content;
+    width: 15%;
+}
+
+
+.user_info_nav label{
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    padding: 25px 10px;
+    cursor: pointer;
+    border-radius: 5px 0 0 5px;
+
+}
+@media (max-width: 890px) {
+    .user_info_nav label {
+
+        border-radius: 5px 5px 0 0;
+    }
+
+}
+.user_info_nav input{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.user_info_content{
+    width: 85%;
+    border-radius: 0 5px 5px 0;
+    background-color: #464646;
+    padding: 25px;
+}
+
+@media (max-width: 890px) {
+    .user_info_nav {
+        display: flex;
+        width: 100%;
+    }
+    .user_info_nav label {
+        flex: 1;
+    }
+    .user_info {
+        flex-direction: column;
+        width: 100%;
+    }
+    .user_info_content {
+        width: 100%;
+    }
+}
+.user_info_content_block{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: #f4f4f4;
+}
+.user_info_content_block label{
+    display: block;
+}
+
+.user_info_btn {
+    display: flex;
+    color: #252525;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+    border: .1pt solid white;
+    font-weight: bold;
+    align-items: center;
+    cursor: pointer;
+    background-color: #f4f4f4;
+
+}
+.user_info_btn img{
+    width: 15px;
+    margin-right: 10px;
+    transition: .3s;
+}
+.user_info_btn:hover img{
+    transform: rotate(-30deg);
+
+}
+
+.window_update{
+    display: flex;
+}
+.form_update {
+    border: .1pt solid black;
+    padding: 20px;
+    margin: 0 auto;
+    width: 400px;
+
+    border-radius: 6px;
+}
+.form_update label{
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.form_update input{
+    padding-left: 5px;
+    margin-left: 10px;
+    display: block;
+    border-bottom: .1pt solid black;
+    width: 100%;
+}
+.form_update textarea{
+    padding: 0 5px;
+    margin-left: 10px;
+    border-bottom: .1pt solid black;
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    text-align: justify;
+}
+
+
+.form_update button{
+    font-weight: lighter;
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    border: .1pt solid rgba(0, 0, 0, 0.52);
+    transition: .3s;
+}
+.form_update button:hover{
+    letter-spacing: 3px;
+    transition: .3s;
+}
+/*---------ORDER----------*/
+
+.admin_order_block{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 5px 0;
+    position: relative;
+    color: white;
+    border-bottom: .1pt solid white;
+    align-items: center;
+    flex-wrap: nowrap;
+    text-align: center;
+}
+.admin_order_block input[type=submit]{
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+}
+.admin_order_block:hover{
+    border-bottom: .1pt dashed white;
+}
+.admin_order_img{
+    width: 40px;
+    padding: 2px;
+}
+.one_order{
+    display: flex;
+    border-bottom: .1pt solid white;
+    margin: 5px 0;
+}
+.one_order_submit{
+    padding: 11px;
+    margin: auto 0;
+}
+
+
+
+/*---------add report----------*/
+.reports_block{
+    display: flex;
+}
+#report_form{
+    width: 600px;
+    margin: 15px auto;
+}
+@media (max-width: 634px) {
+    #report_form{
+        width: 100%;
+    }
+}
+.reports_block label{
+    display: block;
+    margin-left: 10px;
+    font-size: 16px;
+    background-color: #464646;
+    color: white;
+}
+.reports_block textarea{
+    border: .1pt solid white;
+    background-color: #464646;
+    color: white;
+    padding: 10px;
+    resize: none;
+}
+
+/*---------report----------*/
+.report_block{
+    width: 600px;
+    margin: 15px auto;
+    color: #f1f1f1;
+    font-size: 18px;
+    border-radius: 10px;
+}
+@media (max-width: 634px) {
+    .report_block{
+        width: 100%;
+    }
+}
+
+.report_block_title{
+    background-color: #464646;
+    padding: 10px;
+    width: 100%;
+    border: .1pt solid #464646;
+    border-radius: 10px 10px 0 0;
+
+}
+.report_block_problem{
+    background-color: #464646;
+    padding: 10px;
+    width: 100%;
+}
+.btn_report{
+    background-color: #464646;
+    border: .1pt solid #464646;
+    border-radius: 0 0 10px 0;
+    transition: .5s;
+}
+.enter{
+    display: block;
+    height: 40px;
+    cursor: pointer;
+    filter: invert(1);
+}
+.btn_enter{
+    display: flex;
+    width: 100%;
+}
+.btn_enter input{
+    display: block;
+    background-color: white;
+    height: 42px;
+    width: 100%;
+    border: .1pt solid #464646;
+    border-right: none;
+    border-radius: 0 0 0 10px;
+    padding: 10px;
+}
+
+.btn_report:hover{
+    background-color: white;
+}
+.btn_report:hover img{
+    filter: invert(0.3);
+}
+.report_otvet{
+    color: #464646;
+    background-color: white;
+    border: .1pt solid #464646;
+    border-radius: 0 0 10px 10px;
+    text-align: right;
+    padding: 10px;
+}

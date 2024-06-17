@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Додати товар
+{% endblock%}
+
+{% block body %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages and messages[0][0] == 'add' %}
+            <div class="error-message" id="message-{{ messages[0][0] }}">{{ messages[0][1] }}</div>
+        {% endif %}
+    {% endwith %}
+
+    <form method="post" enctype="multipart/form-data" class="add_form" id="add_form">
+        <div class="addimageblock">
+            <input id="imagefile" type="button" class="addimage" onclick="document.getElementById('image').click();" value="Добавить обложку">
+            <input onchange="loadFile(event)" id="image" type="file" name="image" style="display: none;"/>
+        </div>
+        <div class="add_info">
+            <label>Заголовок: <input type="text" name="title" class="bottomline" style="width: 50%"></label>
+            <div>
+                <label>Тип:
+                    <select form="add_form" name="type">
+                        <option>Підвіски</option>
+                        <option>Сережки</option>
+                        <option>Каблучка</option>
+                        <option>Кольє</option>
+                        <option>Браслети</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>Метал:
+                    <select form="add_form" name="metal" id="metal">
+                        <option>Золото</option>
+                        <option>Срібло</option>
+                    </select>
+                </label>
+            </div>
+            <label>Проба: <input id="proba" type="text" name="proba" placeholder="0-999" class="bottomline" value="585"></label>
+            <div>
+                <label>Колір металу:
+                    <select form="add_form" name="metal_color">
+                        <option>Білий</option>
+                        <option>Жовтий</option>
+                        <option>Червоний</option>
+                    </select>
+                </label>
+            </div>
+            <div class="add__checkbox_block">
+                <label class="checkbox_block">Вставки:
+                    <label for="checkbox1"><input type="checkbox" value="кварц" id="checkbox1">кварц</label>
+                    <label for="checkbox2"><input type="checkbox" value="лазурит" id="checkbox2">лазурит</label>
+                    <label for="checkbox3"><input type="checkbox" value="фианит" id="checkbox3">фианит</label>
+                    <label for="checkbox4"><input type="checkbox" value="жемчуг" id="checkbox4">жемчуг</label>
+                    <label for="checkbox5"><input type="checkbox" value="аметист" id="checkbox5">аметист</label>
+                    <label for="checkbox6"><input type="checkbox" value="топаз" id="checkbox6">топаз</label>
+                </label>
+                <label style="display: none"><input type="text" id="stone" name="stone"></label>
+            </div>
+            <label>Стать:
+                <select form="add_form" name="gender">
+                    <option>Жіночі</option>
+                    <option>Чоловічі</option>
+                    <option>Дитячі</option>
+                </select>
+            </label>
+            <div class="add_price_submit">
+                <label>Ціна(грн): <input type="text" name="price" class="bottomline"></label>
+                <input type="text" name="count" class="bottomline" placeholder="Кількість" style="width: 80px" value="10">
+                <input type="submit" class="btn_border btn_bf" value="Додати">
+            </div>
+        </div>
+    </form>
+    <script src="{{ url_for('static', filename='scripts/add.js') }}"></script>
+{% endblock %}

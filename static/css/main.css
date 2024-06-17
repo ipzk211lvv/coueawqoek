@@ -1,0 +1,286 @@
+/*Обнулення*/
+*, *::before, *::after{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+.no-select {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+input,select,textarea,button {
+    outline:none;
+}
+ul, ol, li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+img{
+    vertical-align: top;
+}
+h1, h2, h3, h4, h5, h6{
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+html, body{
+    height: 100%;
+    line-height: 1;
+    font-size: 16px;
+    color: #252B42;
+    background-color: #FFFFFF;
+    font-weight: lighter;
+    font-family: 'Calibri', serif;
+}
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+body.lock {
+    overflow: hidden;
+}
+
+
+._container {
+    min-width: 404px;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+main{
+    margin: 30px 0 150px 0;
+}
+
+.btn_full{
+    color: white;
+    background-color: #464646;
+}
+.btn_full:hover{
+    background-color: rgb(98, 98, 98);
+}
+
+.btn_border{
+    color: #464646;
+    background-color: transparent;
+    border: .1pt solid #464646;
+}
+.btn_border:hover{
+    color: white;
+    background-color: #464646;
+}
+.btn_bf{
+    display: block;
+    padding: 8px 5px;
+    width: 45%;
+    font-size: 14px;
+    transition: .3s;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+.cart_all_block{
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+}
+@media (max-width: 940px) {
+    .cart_all_block{
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(1, auto);
+    }
+}
+.cart_one_block{
+    display: flex;
+    position: relative;
+
+    padding: 25px 15px 0;
+    width: 100%;
+}
+.cart_img{
+}
+.cart_img img{
+    display: block;
+    width: 150px;
+}
+.cart_info{
+    position: relative;
+    width: 100%;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 15px 0;
+    border-right: .1pt solid #464646;
+}
+.cart_info a{
+    color: #252B42;
+}
+.plusmin{
+    display: flex;
+}
+.plusmin_count p{
+    margin: 4px 10px 0 0;
+}
+.plus_min{
+    background-color: #464646;
+    color: white;
+    padding: 2px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid white;
+    cursor: pointer;
+}
+.cart_btn{
+    display: flex;
+    justify-content: space-between;
+}
+.not_cart{
+    display: none;
+    width: 100%;
+    padding: 10px 30px;
+    text-align: center;
+}
+.not_cart img{
+    width: 100%;
+    max-width: 400px;
+}
+.cart_buy_all{
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+.cart_buy_all a{
+    width: fit-content;
+    padding: 10px 40px;
+    margin: 0 auto;
+}
+.checkbox_info{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.buy_form{
+    margin: 0 auto;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    border-top: .1pt solid #464646;
+    padding: 20px;
+    font-size: 18px;
+
+}
+.buy_form_name{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.buy_form_name div{
+    display: flex;
+}
+.buy_form input{
+    font-size: 18px;
+    border: .1pt solid #464646;
+    padding: 7px;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    margin: 15px auto;
+    padding: 10px;
+}
+.lab1{
+    background-color: #464646;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+}
+.lab2{
+    border: .1pt solid #464646;
+    margin-bottom: 10px;
+    border-radius: 0 0 10px 10px;
+    padding: 5px;
+}
+
+.form input{
+    background-color: #464646;
+    color: white;
+    border-bottom: .1pt solid white;
+    width: 90%;
+    padding: 2px;
+
+}
+.form textarea{
+    width: 100%;
+    resize: none;
+    padding: 5px;
+    border-radius: 2px;
+}
+.form button{
+    border-radius: 5px;
+    width: 100%;
+}
+
+.pidtrimka{
+    display: flex;
+    justify-content: space-between;
+}
+.pidtrimka p{
+    text-align: center;
+    width: 33%;
+}
+.pidtrimka p:first-child{
+    text-align: left;
+}
+.pidtrimka p:last-child{
+    text-align: right;
+}
+.pidtrimka_a{
+    width: 100%;
+    border-bottom: 1px solid white;
+    padding: 10px;
+    color: white;
+}
+.pidtrimka_a:hover{
+    background-color: #494949;
+    border-bottom: 1px dashed white;
+}
+#message-cart{
+    width: fit-content;
+    padding: 10px;
+    border: .1pt solid #464646;
+    color:  #464646;
+    margin: 0 auto;
+}
